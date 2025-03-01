@@ -67,9 +67,13 @@ JWT_SECRET_KEY="sua_chave_secreta"
 Após um login bem-sucedido, um token JWT será gerado e enviado na resposta:
 ```json
 {
-    "status": 200,
-    "message": "Login realizado com sucesso!",
-    "token": "seu_token_aqui"
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Login realizado com sucesso."
+    },
+    "retorno": {
+        "token": "Seu Token"
+    }
 }
 ```
 
@@ -93,34 +97,17 @@ http://localhost:8080
 
 ---
 
-## ⚠️ Solução para Erro `Unknown column 'users.deleted_at' in 'where clause'`
-Caso ocorra esse erro ao tentar logar:
-```sh
-Unknown column 'users.deleted_at' in 'where clause'
-```
-### 🔹 Opção 1: Desativar Soft Deletes no `UserModel.php`
-```php
-protected $useSoftDeletes = false;
-```
-
-### 🔹 Opção 2: Criar a Coluna `deleted_at` no Banco de Dados
-```sql
-ALTER TABLE users ADD COLUMN deleted_at TIMESTAMP NULL DEFAULT NULL;
-```
-
-### 🔹 Opção 3: Limpar Cache das Migrations
-```sh
-php spark migrate:refresh
-```
-> **Atenção**: Este comando recria todas as tabelas, apagando os dados existentes.
-
----
-
 ## 📌 Endpoints da API
 
 ### 🔹 **Autenticação**
 - **Login**: `POST /users/login`
-  - Parâmetros: `{ "email": "exemplo@email.com", "password": "123456" }`
+  - Parâmetros:
+  - `{
+    "parametros": {
+        "email": "teste2@gmail.com",
+        "password": "123456"
+        }
+    }`
   - Retorno: `token JWT`
 
 ### 🔹 **Clientes** (`/customers`)
