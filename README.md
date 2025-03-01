@@ -121,6 +121,11 @@ Authorization: Bearer seu_token_aqui
 
 ## 📌 Endpoints da API
 
+## Testando a API no Postman  
+Para facilitar os testes, acesse o workspace do Postman pelo link abaixo:  
+🔗 [Workspace no Postman](https://www.postman.com/aviation-cosmologist-63366748/prova-tcnica-backend)
+
+
 ### 🔹 **Autenticação**
 - **Login**: `POST /users/login`
 - **Resgister**: `POST /users/register`
