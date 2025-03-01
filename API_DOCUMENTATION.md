@@ -28,7 +28,7 @@
         "email": "joaosilva@example.com"
     }
 }
-
+```
 ### 🔑 Login
 **Endpoint:** `POST /users/login`  
 **Descrição:** Autentica um usuário e retorna um token JWT.  
@@ -53,7 +53,42 @@
     }
 }
 ```
+---
 
+## 🛍️ Clientes (Customers)
+### 🔹 Listar Clientes
+**Endpoint:** `GET /customers`  
+**Descrição:** Retorna uma lista de clientes cadastrados. Pode ser filtrado por nome_razao_social e cpf_cnpj 
+**Parâmetros de Consulta (Query Params):**
+    >nome_razao_social (opcional): Filtra clientes pelo nome ou razão social.
+    >cpf_cnpj (opcional): Filtra clientes pelo CPF ou CNPJ.
+    >page (opcional): Controla o número da paginação dos registros.
+**Headers:**  
+`Authorization: Bearer <TOKEN>`  
+
+**Exemplo de Requisição:** `/customers?nome_razao_social=João&cpf_cnpj=12345678900&page=2` 
+
+**Exemplo de Resposta (201 Created):**  
+```json
+{
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Clientes encontrados com sucesso!"
+    },
+    "retorno": [
+        {
+            "id": 1,
+            "nome_razao_social": "João Silva",
+            "cpf_cnpj": "12345678900",
+        },
+        {
+            "id": 2,
+            "nome_razao_social": "Empresa XYZ",
+            "cpf_cnpj": "98765432100001",
+        }
+    ]
+}
+```
 ---
 
 ## 🛍️ Clientes (Customers)
@@ -77,44 +112,89 @@
 {
     "cabecalho": {
         "status": 201,
-        "mensagem": "Cliente cadastrado com sucesso"
+        "mensagem": "Cliente registrado com sucesso!"
     },
     "retorno": {
-        "id": 1,
         "cpf_cnpj": "12345678900",
         "nome_razao_social": "Fulano de Tal"
     }
 }
 ```
 
-### 🔍 Listar Clientes
-**Endpoint:** `GET /customers`  
-**Descrição:** Retorna a lista de clientes cadastrados.  
+### 🔍 Listar Cliente
+**Endpoint:** `GET /customers/$id`  
+**Descrição:** Retorna os detalhes de um cliente específico com base no ID.  
 **Headers:**  
 `Authorization: Bearer <TOKEN>`  
+
+**Exemplo de Requisição:** `/customers/1` 
 
 **Exemplo de Resposta (200 OK):**  
 ```json
 {
     "cabecalho": {
         "status": 200,
-        "mensagem": "Lista de clientes"
+        "mensagem": "Cliente encontrado com sucesso!"
     },
-    "retorno": [
-        {
-            "id": 1,
-            "cpf_cnpj": "12345678900",
-            "nome_razao_social": "Fulano de Tal"
-        },
-        {
-            "id": 2,
-            "cpf_cnpj": "98765432100",
-            "nome_razao_social": "Ciclano de Souza"
-        }
-    ]
+    "retorno": {
+        "id": 1,
+        "nome_razao_social": "João Silva",
+        "cpf_cnpj": "12345678900",
+        "created_at": "2023-10-01T12:00:00Z"
+    }
+}
+```
+---
+
+### 🔍 Atualizar Cliente
+**Endpoint:** `PUT /customers/$id`  
+**Descrição:** Atualiza os dados de um cliente existente com base no ID.  
+**Headers:**  
+`Authorization: Bearer <TOKEN>`  
+
+**Exemplo de Requisição:**  
+```json
+{
+    "parametros": {
+        "nome_razao_social": "João Silva Santos",
+        "cpf_cnpj": "12345678900"
+    }
 }
 ```
 
+**Exemplo de Resposta (200 OK):**  
+```json
+{
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Cliente atualizado com sucesso"
+    },
+    "retorno": {
+        "nome_razao_social": "João Silva Santos",
+        "cpf_cnpj": "12345678900",
+    }
+}
+```
+---
+
+### 🔍 Excluir Cliente
+**Endpoint:** `DELETE /customers/$id`  
+**Descrição:** Exclui um cliente com base no ID.  
+**Headers:**  
+`Authorization: Bearer <TOKEN>`  
+
+**Exemplo de Requisição:** `/customers/1` 
+
+**Exemplo de Resposta (200 OK):**  
+```json
+{
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Registro apagado com sucesso!"
+    },
+    "retorno": ""
+}
+```
 ---
 
 ## 📦 Pedidos (Orders)
