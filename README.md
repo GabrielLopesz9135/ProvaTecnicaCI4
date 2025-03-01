@@ -143,7 +143,7 @@ Retorno:
 ```json
 {
     "cabecalho": {
-        "status": CodigoHTTP,
+        "status": 200,
         "mensagem": "Mensagem"
     },
     "retorno": {
