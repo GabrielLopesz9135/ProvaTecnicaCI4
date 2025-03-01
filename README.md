@@ -1,68 +1,200 @@
-# CodeIgniter 4 Application Starter
+# CodeIgniter 4 API - CRUD com JWT Authentication
 
-## What is CodeIgniter?
+## 📌 Sobre o Projeto
+Este projeto é uma API RESTful desenvolvida com CodeIgniter 4, implementando CRUDs para clientes, produtos e ordens de compra. O sistema utiliza autenticação JWT para garantir segurança nas requisições.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🚀 Configuração do Ambiente
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### 🔹 1. Clonar o Repositório
+```sh
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 🔹 2. Instalar as Dependências do Composer
+```sh
+composer install
+```
 
-## Installation & updates
+### 🔹 3. Configurar o Ambiente
+Renomeie o arquivo `.env.example` para `.env` e edite os seguintes valores:
+```sh
+CI_ENVIRONMENT = development
+```
+> **Observação**: O `CI_ENVIRONMENT` define o ambiente de desenvolvimento. Em produção, altere para `production`.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+### 🔹 4. Configurar o Banco de Dados
+No arquivo `.env`, edite as credenciais do banco:
+```sh
+database.default.hostname = localhost
+database.default.database = nome_do_banco
+database.default.username = usuario
+database.default.password = senha
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+```
+> **Dica**: Certifique-se de que o banco de dados já foi criado antes de rodar as migrations.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+### 🔹 5. Rodar as Migrations
+```sh
+php spark migrate
+```
+Se precisar recriar as tabelas, utilize:
+```sh
+php spark migrate:refresh
+```
 
-## Setup
+---
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 🔑 Configuração do JWT
 
-## Important Change with index.php
+### 🔹 1. Instalar a Biblioteca JWT
+```sh
+composer require firebase/php-jwt
+```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+### 🔹 2. Configurar a Chave Secreta no `.env`
+Adicione:
+```sh
+JWT_SECRET_KEY="sua_chave_secreta"
+```
+> **Importante**: Substitua `sua_chave_secreta` por uma chave forte e segura.
+Voce pode criar sua chave pessoal pelo comando ``` sh php -r 'echo bin2hex(random_bytes(32));'. ``` ou pelo site https://jwt.io/
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 🔹 3 🛠️ Execução do Servidor
+Para rodar o servidor localmente, utilize:
+```sh
+php spark serve
+```
+O servidor estará acessível em:
+```
+http://localhost:8080
+```
 
-**Please** read the user guide for a better explanation of how CI4 works!
+---
 
-## Repository Management
+### 🔹 4. Realizar Registro
+Após finalizar as configurações, efetue o registro no sistema:
+```json
+{
+    "parametros": {
+        "name": "Nome",
+        "email": "email@gmail.com",
+        "password": "123456"
+    }
+}
+```
+### 🔹 5. Criar Token JWT no Login
+Após um login bem-sucedido, um token JWT será gerado e enviado na resposta:
+Login:
+```json
+{
+    "parametros": {
+        "email": "email@gmail.com",
+        "password": "123456"
+    }
+}
+```
+Retorno:
+```json
+{
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Login realizado com sucesso."
+    },
+    "retorno": {
+        "token": "Seu Token"
+    }
+}
+```
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 🔹 6. Enviar o Token nas Requisições Protegidas
+Nas requisições autenticadas, envie o token no cabeçalho:
+```sh
+Authorization: Bearer seu_token_aqui
+```
+---
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## 📌 Endpoints da API
 
-## Server Requirements
+## Testando a API no Postman  
+Para facilitar os testes, acesse o workspace do Postman pelo link abaixo:  
+🔗 [Workspace no Postman](https://www.postman.com/aviation-cosmologist-63366748/prova-tcnica-backend)
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+## Autenticando a Rota  
+Dentro do workspace existe uma variável de ambiente chamada **Token**, que pode ser alterada para o token desejado.  
+Basta substituir essa variável por um token válido gerado por você, e todas as rotas ficarão disponíveis para uso.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+### 🔹Parametros e Retorno da Rotas
+Todas as Rotas esperam um JSON nesse formato:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+```json
+{
+    "parametros": {
+        //Dados a serem cunsumidos
+    }
+}
+```
+Retorno:
+```json
+{
+    "cabecalho": {
+        "status": 200,
+        "mensagem": "Mensagem"
+    },
+    "retorno": {
+        // Dados Retornados
+    }
+}
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### 🔹 **Autenticação**
+- **Login**: `POST /users/login`
+- **Resgister**: `POST /users/register`
+  
+### 🔹 **Clientes** (`/customers`)
+- `POST /customers` - Criar cliente
+- `GET /customers` - Listar clientes
+- `GET /customers/{id}` - Obter um cliente específico
+- `PUT /customers/{id}` - Atualizar cliente
+- `DELETE /customers/{id}` - Excluir cliente
+
+### 🔹 **Produtos** (`/products`)
+- `POST /products` - Criar produto
+- `GET /products` - Listar produtos
+- `GET /products/{id}` - Obter um produto específico
+- `PUT /products/{id}` - Atualizar produto
+- `DELETE /products/{id}` - Excluir produto
+
+### 🔹 **Ordens de Compra** (`/orders`)
+- `POST /orders` - Criar ordem
+- `GET /orders` - Listar ordens
+- `GET /orders/{id}` - Obter uma ordem específica
+- `PUT /orders/{id}` - Atualizar ordem
+- `DELETE /orders/{id}` - Excluir ordem
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+- **PHP 8.x**
+- **CodeIgniter 4**
+- **MySQL**
+- **JWT Authentication**
+- **Composer**
+
+---
+
+## 📄 Licença
+Este projeto está licenciado sob a licença MIT.
+
+---
+
+## 🤝 Contribuição
+Sinta-se à vontade para abrir Issues ou Pull Requests caso queira contribuir! 🚀
+
+
