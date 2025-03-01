@@ -1,6 +1,34 @@
 # 📌 API Documentation
 
 ## 🛠️ Autenticação
+
+### 📝 Registro  
+**Endpoint:** `POST /users/register`  
+**Descrição:** Registra um novo usuário na plataforma.  
+
+**Exemplo de Requisição:**  
+```json
+{
+    "parametros": {
+        "name": "João Silva",
+        "email": "joaosilva@example.com",
+        "password": "senhasegura"
+    }
+}
+```
+**Exemplo de Resposta (200 OK):**  
+```json
+{
+    "cabecalho": {
+        "status": 201,
+        "mensagem": "Usuário registrado com sucesso"
+    },
+    "retorno": {
+        "name": "João Silva",
+        "email": "joaosilva@example.com"
+    }
+}
+
 ### 🔑 Login
 **Endpoint:** `POST /users/login`  
 **Descrição:** Autentica um usuário e retorna um token JWT.  
