@@ -63,8 +63,44 @@ JWT_SECRET_KEY="sua_chave_secreta"
 ```
 > **Importante**: Substitua `sua_chave_secreta` por uma chave forte e segura.
 
-### 🔹 3. Criar Token JWT no Login
+
+---
+
+### 🔹 3 🛠️ Execução do Servidor
+Para rodar o servidor localmente, utilize:
+```sh
+php spark serve
+```
+O servidor estará acessível em:
+```
+http://localhost:8080
+```
+
+---
+
+### 🔹 4. Realizar Registro
+Após finalizar as configurações, efetue o registro no sistema:
+```json
+{
+    "parametros": {
+        "name": "Nome",
+        "email": "email@gmail.com",
+        "password": "123456"
+    }
+}
+```
+### 🔹 5. Criar Token JWT no Login
 Após um login bem-sucedido, um token JWT será gerado e enviado na resposta:
+Login:
+```json
+{
+    "parametros": {
+        "email": "email@gmail.com",
+        "password": "123456"
+    }
+}
+```
+Retorno:
 ```json
 {
     "cabecalho": {
@@ -77,39 +113,19 @@ Após um login bem-sucedido, um token JWT será gerado e enviado na resposta:
 }
 ```
 
-### 🔹 4. Enviar o Token nas Requisições Protegidas
+### 🔹 6. Enviar o Token nas Requisições Protegidas
 Nas requisições autenticadas, envie o token no cabeçalho:
 ```sh
 Authorization: Bearer seu_token_aqui
 ```
-
----
-
-## 🛠️ Execução do Servidor
-Para rodar o servidor localmente, utilize:
-```sh
-php spark serve
-```
-O servidor estará acessível em:
-```
-http://localhost:8080
-```
-
 ---
 
 ## 📌 Endpoints da API
 
 ### 🔹 **Autenticação**
 - **Login**: `POST /users/login`
-  - Parâmetros:
-  - `{
-    "parametros": {
-        "email": "teste2@gmail.com",
-        "password": "123456"
-        }
-    }`
-  - Retorno: `token JWT`
-
+- **Resgister**: `POST /users/register`
+  
 ### 🔹 **Clientes** (`/customers`)
 - `POST /customers` - Criar cliente
 - `GET /customers` - Listar clientes
