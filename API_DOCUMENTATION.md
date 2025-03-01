@@ -58,11 +58,14 @@
 ## 🛍️ Clientes (Customers)
 ### 🔹 Listar Clientes
 **Endpoint:** `GET /customers`  
-**Descrição:** Retorna uma lista de clientes cadastrados. Pode ser filtrado por nome_razao_social e cpf_cnpj 
-**Parâmetros de Consulta (Query Params):**
-    >nome_razao_social (opcional): Filtra clientes pelo nome ou razão social.
-    >cpf_cnpj (opcional): Filtra clientes pelo CPF ou CNPJ.
-    >page (opcional): Controla o número da paginação dos registros.
+Descrição:
+Retorna uma lista de clientes cadastrados. Pode ser filtrado por nome_razao_social e cpf_cnpj.
+
+Parâmetros de Consulta (Query Params):
+> • nome_razao_social (opcional): Filtra clientes pelo nome ou razão social. <br>
+> • cpf_cnpj (opcional): Filtra clientes pelo CPF ou CNPJ.  <br>
+> • page (opcional): Controla o número da paginação dos registros.
+
 **Headers:**  
 `Authorization: Bearer <TOKEN>`  
 
