@@ -125,6 +125,33 @@ Authorization: Bearer seu_token_aqui
 Para facilitar os testes, acesse o workspace do Postman pelo link abaixo:  
 🔗 [Workspace no Postman](https://www.postman.com/aviation-cosmologist-63366748/prova-tcnica-backend)
 
+## Autenticando a Rota  
+Dentro do workspace existe uma variável de ambiente chamada **Token**, que pode ser alterada para o token desejado.  
+Basta substituir essa variável por um token válido gerado por você, e todas as rotas ficarão disponíveis para uso.
+
+### 🔹Parametros e Retorno da Rotas
+Todas as Rotas esperam um JSON nesse formato:
+
+```json
+{
+    "parametros": {
+        //Dados a serem cunsumidos
+    }
+}
+```
+Retorno:
+```json
+{
+    "cabecalho": {
+        "status": CodigoHTTP,
+        "mensagem": "Mensagem"
+    },
+    "retorno": {
+        // Dados Retornados
+    }
+}
+```
+
 
 ### 🔹 **Autenticação**
 - **Login**: `POST /users/login`
