@@ -533,4 +533,65 @@ Parâmetros de Consulta (Query Params):
 ```
 ---
 
+## Erros
+
+### Erros de Find
+- Quando não há nenhum item na tabela com o ID indicado.
+
+**Exemplo de Resposta (404):**  
+```json
+{
+    "cabecalho": {
+        "status": 400,
+        "mensagem": "Nenhum registro encontrado no Banco de Dados"
+    },
+    "retorno": ""
+}
+```
+
+### Erros de Métodos Update, Insert, Delete
+- Quando ocorre um erro nos métodos de atualização, inserção ou exclusão, as mensagens de validação podem ser recuperadas utilizando o metodo: $this->model->errors();
+
+**Exemplo de Resposta (422):**  
+```json
+{
+    "cabecalho": {
+        "status": 422,
+        "mensagem": "Erro na validação dos dados."
+    },
+    "retorno": {
+        "errors": {
+            "email": "O campo email é obrigatório",
+            "password": "A senha deve ter no mínimo 6 caracteres"
+        }
+    }
+}
+```
+### Erro de Ausência de Campo
+- Todos os métodos que recebem um JSON no request passam por um JSONValidator Helper, que verifica se o JSON tem o formato correto e percorre o JSON para garantir que todos os campos obrigatórios estejam presentes.
+
+**Exemplo de Resposta (400):**  
+```json
+{
+    "cabecalho": {
+        "status": 400,
+        "mensagem": "Erro na validação dos dados."
+    },
+    "retorno": "Campo obrigatório 'name' está ausente."
+}
+```
+
+### Erro de JSON com Formato Inválido
+- Os métodos que recebem JSON no request possuem um try-catch para verificar se o método: $request = $this->request->getJSON(true); Vai retornar um erro ou recuperar o JSON corretamente.
+
+**Exemplo de Resposta (400):**  
+```json
+{
+    "cabecalho": {
+        "status": 400,
+        "mensagem": "Formato JSON inválido. Verifique a sintaxe."
+    },
+    "retorno": ""
+}
+```
 
