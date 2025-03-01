@@ -62,8 +62,8 @@ Adicione:
 JWT_SECRET_KEY="sua_chave_secreta"
 ```
 > **Importante**: Substitua `sua_chave_secreta` por uma chave forte e segura.
-
-
+> **Importante**: Voce pode criar sua chave pessoal pelo comando ``` sh php -r 'echo bin2hex(random_bytes(32));'. ``` ou pelo site https://jwt.io/
+> 
 ---
 
 ### 🔹 3 🛠️ Execução do Servidor
