@@ -195,7 +195,7 @@ Retorno:
 
 ## Banco de Dados
 
-![Diagrama Banco de Dados MySQL](https://i.postimg.cc/GphCFcBt/Captura-de-tela-2025-03-02-103744.png)
+![Diagrama Banco de Dados MySQL](https://postimg.cc/sM8qyC4C)
 
 
 ---
