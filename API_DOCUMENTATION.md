@@ -59,7 +59,7 @@
 ### 🔹 Listar Clientes
 **Endpoint:** `GET /customers`  
 Descrição:
-Retorna uma lista de clientes cadastrados. Pode ser filtrado por nome_razao_social e cpf_cnpj.
+Retorna uma lista de clientes cadastrados. Pode ser filtrado por Nome/Razão Social e CPF/CNPJ.
 
 Parâmetros de Consulta (Query Params):
 > • nome_razao_social (opcional): Filtra clientes pelo nome ou razão social. <br>
@@ -203,7 +203,7 @@ Parâmetros de Consulta (Query Params):
 ### 🔹 Listar Produtos
 **Endpoint:** `GET /products`  
 Descrição:
-Retorna uma lista de produtos cadastrados. Pode ser filtrado por name e price.
+Retorna uma lista de produtos cadastrados. Pode ser filtrado por Nome e Preço.
 
 Parâmetros de Consulta (Query Params):
 > • name (opcional): Filtra produtos pelo nome. <br>
@@ -213,7 +213,7 @@ Parâmetros de Consulta (Query Params):
 **Headers:**  
 `Authorization: Bearer <TOKEN>`  
 
-**Exemplo de Requisição:** `/products?name=Notebook&price=4500` 
+**Exemplo de Requisição:** `/products?name=Notebook&price=4500&page=2` 
 
 **Exemplo de Resposta (200):**  
 ```json
@@ -550,7 +550,7 @@ Parâmetros de Consulta (Query Params):
 ```
 
 ### Erros de Métodos Update, Insert, Delete
-- Quando ocorre um erro nos métodos de atualização, inserção ou exclusão, as mensagens de validação podem ser recuperadas utilizando o metodo: $this->model->errors();
+- Quando ocorre um erro nos métodos de atualização, inserção ou exclusão, as mensagens de validação presentes no model podem ser recuperadas utilizando o metodo $this->model->errors() no retorno;
 
 **Exemplo de Resposta (422):**  
 ```json
@@ -568,7 +568,7 @@ Parâmetros de Consulta (Query Params):
 }
 ```
 ### Erro de Ausência de Campo
-- Todos os métodos que recebem um JSON no request passam por um JSONValidator Helper, que verifica se o JSON tem o formato correto e percorre o JSON para garantir que todos os campos obrigatórios estejam presentes.
+- Todos os métodos que recebem um JSON no request passam por um JSONValidator Helper. A função dentro do Helper espera receber o JSON e uma lista de campos obrigatórios, um foreach vai percorrer a lista e retornar um erro caso algum campo esteja faltando. 
 
 **Exemplo de Resposta (400):**  
 ```json
