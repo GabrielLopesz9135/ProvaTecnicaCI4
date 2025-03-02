@@ -195,7 +195,7 @@ Retorno:
 
 ## Banco de Dados
 
-![Diagrama Banco de Dados MySQL](https://postimg.cc/sM8qyC4C)
+[![Diagrama-Banco-de-Dados.png](https://i.postimg.cc/GphCFcBt/Diagrama-Banco-de-Dados.png)](https://postimg.cc/sM8qyC4C)
 
 
 ---
