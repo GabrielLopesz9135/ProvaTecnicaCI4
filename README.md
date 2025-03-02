@@ -193,6 +193,13 @@ Retorno:
 
 ---
 
+## Banco de Dados
+
+![Diagrama Banco de Dados MySQL](https://i.postimg.cc/GphCFcBt/Captura-de-tela-2025-03-02-103744.png)
+
+
+---
+
 ## 📄 Licença
 Este projeto está licenciado sob a licença MIT.
 
